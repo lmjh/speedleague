@@ -1,0 +1,109 @@
+:root {
+    --bs-danger: #b63d30;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #ca4536;
+    border-color: #ca4536;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #aa392d;
+    border-color: #aa392d;
+}
+
+body {
+    font-size: 1.2rem;
+    font-family: 'Quicksand', sans-serif;
+}
+
+i {
+    font-style: normal;
+}
+
+.header-logo {
+    width: 80%;
+}
+
+.scores-table {
+    font-family: 'Signika Negative', sans-serif;
+    font-weight: bold;
+}
+
+.twitch-link,
+.twitch-link>i {
+    text-decoration: none;
+    color: #975fff;
+    font-size: 1.5rem;
+    padding: 0px 3px;
+}
+
+.twitch-link>i:hover {
+    color: #823eff;
+}
+
+.youtube-link,
+.youtube-link>i {
+    text-decoration: none;
+    color: #ff4646;
+    font-size: 1.5rem;
+    padding: 0px 3px;
+}
+
+.youtube-link>i:hover {
+    color: #ff2626;
+}
+
+.other-link,
+.other-link>i {
+    text-decoration: none;
+    color: #ff8833;
+    font-size: 1.5rem;
+    padding: 0px 3px;
+}
+
+.other-link>i:hover {
+    color: #ff6c00;
+}
+
+.medal {
+    height: 35px;
+}
+
+.navbar {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.nav-logo {
+    height: 50px;
+}
+
+.nav-row {
+    margin-bottom: 75px;
+}
+
+.offcanvas-logo {
+    height: 32px;
+}
+
+.help-link {
+    color: #bbb;
+}
+
+.help-link:hover {
+    color: #fff;
+}
+
+[aria-expanded="false"] .fa-circle-minus,
+[aria-expanded="true"] .fa-circle-question {
+    display: none;
+}
+
+.tutorial-btn {
+    padding: 3px 6px;
+    cursor: initial;
+    margin-bottom: 2px;
+}

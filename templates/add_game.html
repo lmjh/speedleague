@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-sm-12 col-md-8 mx-auto">
+            <div class="card border-secondary shadow mb-3">
+                <div class="card-header">Add Game</div>
+                <div class="card-body">
+                    <form method="POST" action="">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label class="col-form-label" for="name">Game Name</label>
+                                <input id="name" name="name" minlength="2" maxlength="50"
+                                    pattern="^[a-zA-Z0-9 _\-:'.!,]{2,50}$" class="form-control" type="text" required>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                    <a href="{{ url_for('admin') }}" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Add Game</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

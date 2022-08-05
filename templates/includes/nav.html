@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row nav-row">
+        <nav class="navbar fixed-top navbar-dark bg-dark shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url_for('home') }}"><img
+                        src="{{ url_for('static', filename='images/speedleague-nav-logo.svg') }}" class="nav-logo"
+                        alt="SpeedLeague logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" aria-label="Expand and collapse navigation menu"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <div class="offcanvas-title text-center mx-auto mt-3" id="offcanvasNavbarLabel"><img
+                                src="{{ url_for('static', filename='images/speedleague-logo.svg') }}"
+                                class="offcanvas-logo" alt="SpeedLeague logo"></div>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            {% if session.user %}
+                            <hr class="mt-0">
+                            <a class="nav-link" href="{{ url_for('admin') }}">Admin Panel</a>
+                            <a class="nav-link" href="{{ url_for('update_password') }}">Update Password</a>
+                            {% if session.user == 'admin' -%}
+                            <a class="nav-link" href="{{ url_for('manage_users') }}">Manage Users</a>
+                            {%- endif %}
+                            <a class="nav-link mb-3" href="{{ url_for('logout') }}">Logout</a>
+                            {%- endif %}
+                            <hr class="mt-0">
+                            {% for game, categories in nav_links.items() -%}
+                            {%- if categories -%}
+                            {{- url_to_display(game) -}}
+                            {%- for category in categories -%}
+                            <a class="nav-link" aria-current="page" href="{{url_for('show_scores', game_name=game, 
+                            category_name=category['name'])|urlencode()}}">{{url_to_display(category['name'])}}</a>
+                            {% endfor -%}
+                            <hr>
+                            {% endif -%}
+                            {%- endfor -%}
+                            {% if not session.user %}
+                            <a class="nav-link" href="{{ url_for('login') }}">Admin Login</a>
+                            <hr>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

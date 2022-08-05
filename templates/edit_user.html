@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-sm-12 col-md-8 mx-auto mt-5">
+            <div class="card border-secondary shadow mb-3">
+                <div class="card-header">Edit User</div>
+                <div class="card-body">
+                    <form method="POST" action="" class="needs-validation" novalidate>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label class="col-form-label" for="username">Username</label>
+                                <input id="username" name="username" minlength="5" maxlength="15"
+                                    pattern="^[a-zA-Z0-9]{5,15}$" class="form-control" type="text"
+                                    value="{{user.username}}" disabled>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="col-form-label mt-2" for="password">Password</label>
+                                <input id="password" name="password" type="password" minlength="5" maxlength="30"
+                                    class="form-control" oninput="checkPasswordsMatch()" required>
+                                <div class="invalid-feedback">
+                                    Password must be at least 5 characters long.
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="col-form-label mt-2" for="confirm_password">Confirm Password</label>
+                                <input id="confirm_password" name="confirm_password" type="password" minlength="5" maxlength="30"
+                                    class="form-control" oninput="checkPasswordsMatch()" required>
+                                <div class="invalid-feedback">
+                                    Passwords must match.
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                    <a href="{{ url_for('manage_users') }}" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Edit User</button></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    function checkPasswordsMatch() {
+        let password = document.getElementById("password");
+        let confirm_password = document.getElementById("confirm_password");
+        if (confirm_password.value !== password.value) {
+            confirm_password.setCustomValidity("Password confirmation does not match password");
+        } else {
+            confirm_password.setCustomValidity("");
+        }
+    }
+
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-sm-12 col-md-8 mx-auto">
+            <div class="card border-secondary shadow mb-3">
+                <div class="card-header">
+                    Add Score - {{ url_to_display(game.name) }} - {{ url_to_display(category.name) }}
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('add_score', category_id=category._id) }}">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="player_name" class="form-label mt-4">Select Player</label>
+                                <select class="form-select" id="player_name" name="player_name" required>
+                                    <option value="" disabled selected>Select Player</option>
+                                    {% for player in players %}
+                                    <option value="{{player._id }}">{{ player.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="form-label mt-4">Time</label>
+                                <div class="input-group">
+                                    <input id="hours" name="hours" type="text" class="form-control text-center" value="00" pattern="^[0-9]{1,2}$" required aria-label="Hours">
+                                    <span class="input-group-text">:</span>
+                                    <input id="minutes" name="minutes" type="text" class="form-control text-center" value="00" pattern="^[0-9]{1,2}$" required aria-label="Minutes">
+                                    <span class="input-group-text">:</span>
+                                    <input id="seconds" name="seconds" type="text" class="form-control text-center" value="00" pattern="^[0-9]{1,2}$" required aria-label="Seconds">
+                                    <span class="input-group-text">:</span>
+                                    <input id="centiseconds" name="centiseconds" type="text" class="form-control text-center" value="00" pattern="^[0-9]{1,2}$" required aria-label="centiseconds">
+                                  </div>
+                                  <div class="text-center mt-1 text-muted">( hours : minutes : seconds : centiseconds )</div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                    <a href="{{ url_for('admin') }}" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Add Score</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

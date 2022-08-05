@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-sm-12 col-md-8 mx-auto">
+            <div class="card border-secondary shadow mb-3">
+                <div class="card-header">500 - Internal Server Error</div>
+                <div class="card-body">
+                    <p>Oops, something's gone wrong. <a href="{{ url_for('home') }}">Click here</a> to go home, or pick
+                        a different destination from the <a href="" role="button"
+                        data-bs-toggle="offcanvas" aria-label="Expand and collapse navigation menu"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">nav menu.</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

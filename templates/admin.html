@@ -1,0 +1,365 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row text-center mt-5">
+        <h1>Admin Panel</h1>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-sm-12 col-md-8 mx-auto mt-5">
+            <div class="card border-secondary shadow mb-3">
+                <div class="card-header">
+                    <span class="float-end">
+                        <a class="help-link" data-bs-toggle="collapse" href="#scores-help" role="button"
+                            aria-expanded="false" aria-controls="scores-help" id="scores-help-button">
+                            <i class="fa-solid fa-circle-question"></i>
+                            <i class="fa-solid fa-circle-minus"></i>
+                        </a>
+                    </span>
+                    Scores</div>
+                <div class="collapse" id="scores-help">
+                    <div class="card-body small lh-lg">
+                        <p>Use this panel to manage scores. Scores in the database are grouped by <strong>game</strong>
+                            and by <strong>category</strong>. Find the game and category you want to add a score for in
+                            the table, then click the <span class="tutorial-btn btn btn-primary">Add Score</span>
+                            button.</p>
+                        <p>The leaderboards only display the fastest time for each player, so you don't need to delete
+                            older times. If an incorrect score has been added, you can click the <span
+                                class="tutorial-btn btn btn-danger">Delete a Score</span> button to select and delete
+                            the score from a list of all the scores in the category</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 mx-auto">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle table-striped text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Game</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col" class="visually-hidden">Add Score Link</th>
+                                            <th scope="col" class="visually-hidden">Delete a Score Link</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for game, categories in nav_links.items() -%}
+                                        {%- for category in categories %}
+                                        <tr>
+                                            <td>{{ url_to_display(game) }}</td>
+                                            <td>{{ url_to_display(category.name) }}</td>
+                                            <td><a href="{{ url_for('add_score', category_id=category._id) }}"
+                                                    class="btn btn-primary">Add Score</a></td>
+                                            <td><a href="{{ url_for('delete_scores', category_id=category._id) }}"
+                                                    class="btn btn-danger">Delete a Score</a></td>
+                                        </tr>
+                                        {%- endfor -%}
+                                        {%- endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-sm-12 col-md-8 mx-auto mt-5">
+            <div class="card border-secondary shadow mb-3">
+                <div class="card-header">
+                    <span class="float-end">
+                        <a class="help-link" data-bs-toggle="collapse" href="#players-help" role="button"
+                            aria-expanded="false" aria-controls="players-help">
+                            <i class="fa-solid fa-circle-question"></i>
+                            <i class="fa-solid fa-circle-minus"></i>
+                        </a>
+                    </span>
+                    Players</div>
+                <div class="collapse" id="players-help">
+                    <div class="card-body small lh-lg">
+                        <p>Use this panel to manage the players in the database. A player must be added to the database
+                            with the <span class="tutorial-btn btn btn-primary">Add Player</span> button before you can
+                            add a score from them.</p>
+                        <p>The "Player Name" is used on the leaderboards. You can optionally add a Twitch or YouTube
+                            channel and/or another link, which will also be added to the leaderboards. These can all be
+                            updated by clicking the <span class="tutorial-btn btn btn-primary">Edit Player</span>
+                            button.</p>
+                        <p> To remove a player from the database, click the <span class="tutorial-btn btn btn-danger"> 
+                            Delete Player</span> button and then confirm the deletion when prompted. This will remove 
+                            the player and all of their scores from the live database. The data will be archived, in 
+                            case of accidental deletion.</P>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 mx-auto">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle table-striped text-center ">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Player Name</th>
+                                            <th scope="col">Links</th>
+                                            <th scope="col" class="visually-hidden">Edit Player Link</th>
+                                            <th scope="col" class="visually-hidden">Delete Player Link</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for player in players -%}
+                                        <tr>
+                                            <td>{{ player.name }}</td>
+                                            <td>
+                                                {%- if player.links.twitch -%}<a href='{{ player.links.twitch }}'
+                                                    target="_blank" class="twitch-link"><i
+                                                        class="fa-brands fa-twitch"></i></a>{%- endif -%}
+                                                {%- if player.links.youtube -%}<a href='{{ player.links.youtube }}'
+                                                    target="_blank" class="youtube-link"><i
+                                                        class="fa-brands fa-youtube"></i></a>{%- endif -%}
+                                                {%- if player.links.link -%}<a href='{{ player.links.link }}'
+                                                    target="_blank" class="other-link"><i
+                                                        class="fa-solid fa-arrow-up-right-from-square"></i></a>{%- endif -%}
+                                            </td>
+                                            <td><a href="{{ url_for('edit_player', player_id=player._id) }}"
+                                                    class="btn btn-primary">Edit Player</a></td>
+                                            <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#modal_{{ player._id}}">
+                                                    Delete Player
+                                                </button>
+                                        </tr>
+                                        {%- endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col s12 text-center">
+                            <a class="btn btn-primary" href="{{ url_for('add_player') }}">Add Player</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-sm-12 col-md-8 mx-auto mt-5">
+            <div class="card border-secondary shadow mb-3">
+                <div class="card-header">
+                    <span class="float-end">
+                        <a class="help-link" data-bs-toggle="collapse" href="#games-help" role="button"
+                            aria-expanded="false" aria-controls="games-help">
+                            <i class="fa-solid fa-circle-question"></i>
+                            <i class="fa-solid fa-circle-minus"></i>
+                        </a>
+                    </span>
+                    Games</div>
+                <div class="collapse" id="games-help">
+                    <div class="card-body small lh-lg">
+                        <p>Use this panel to manage the games in the database. Add a new game by clicking the <span
+                                class="tutorial-btn btn btn-primary">Add Game</span> button. The 'Game Name' is used to
+                            generate the URLs for the game's leaderboards and also appears above the leaderboards and
+                            above the category links in the side menu.</p>
+                        <p>Edit a game's name by clicking the <span class="tutorial-btn btn btn-primary">Edit
+                                Game</span> button. Editing the game's name will change the URLs for the game's
+                            leaderboards. All internal links will update automatically, but any external links (e.g.
+                            user bookmarks or links from other sites) would be broken.</p>
+                        <p>To remove a game from the database, click the <span
+                                class="tutorial-btn btn btn-danger">Delete Game</span> button and then confirm the
+                            deletion when prompted. This will remove the game and all of the game's categories and
+                            scores from the live database. The data will be archived, in case of accidental deletion.
+                        </p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 mx-auto">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle table-striped text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Game</th>
+                                            <th scope="col" class="visually-hidden">Edit Game Link</th>
+                                            <th scope="col" class="visually-hidden">Delete Game Link</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for game in games -%}
+                                        <tr>
+                                            <td>{{ url_to_display(game.name) }}</td>
+                                            <td><a href="{{ url_for('edit_game', game_id=game._id) }}"
+                                                    class="btn btn-primary">Edit Game</a></td>
+                                            <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#modal_{{game._id}}">
+                                                    Delete Game</button></td>
+                                        </tr>
+                                        {%- endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col s12 text-center">
+                            <a href="{{ url_for('add_game') }}" class="btn btn-primary">Add Game</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center mb-5">
+        <div class="col-sm-12 col-md-8 mx-auto mt-5">
+            <div class="card border-secondary shadow mb-3">
+                <div class="card-header">
+                    <span class="float-end">
+                        <a class="help-link" data-bs-toggle="collapse" href="#categories-help" role="button"
+                            aria-expanded="false" aria-controls="categories-help">
+                            <i class="fa-solid fa-circle-question"></i>
+                            <i class="fa-solid fa-circle-minus"></i>
+                        </a>
+                    </span>
+                    Categories</div>
+                <div class="collapse" id="categories-help">
+                    <div class="card-body small lh-lg">
+                        <p>Use this panel to manage the categories in the database. Add a new category by clicking the
+                            <span class="tutorial-btn btn btn-primary">Add Category</span> button under the relevant
+                            game. The "Category Name" is used to generate the URL for the category's leaderboard
+                            and also appears above the leaderboard and in the category link in the side menu. The
+                            "Category Description" appears above the category's leaderboard.</p>
+                        <p>Edit a category by clicking the <span class="tutorial-btn btn btn-primary">Edit
+                                Category</span> button. Editing a category's name will change the URL for the category's
+                            leaderboard. Internal links will update automatically, but any external links (e.g. user
+                            bookmarks or links from other sites) would be broken. Category descriptions can be safely
+                            changed without affecting URLs.</p>
+                        <p>To remove a category from the database, click the <span
+                                class="tutorial-btn btn btn-danger">Delete Category</span> button and then confirm the
+                            deletion when prompted. This will remove the category and all associated scores from the
+                            live database. The data will be archived, in case of accidental deletion.</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% for game in games -%}
+                    <div class="row">
+                        <div class="col-sm-12 mx-auto">
+                            <h3 class="text-center">{{ url_to_display(game.name) }}</h3>
+                            {%- if nav_links[game["name"]] %}
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle table-striped text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Category</th>
+                                            <th scope="col" class="visually-hidden">Edit Category Link</th>
+                                            <th scope="col" class="visually-hidden">Delete Category Link</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {%- for category in nav_links[game["name"]] %}
+                                        <tr>
+                                            <td>{{ url_to_display(category.name) }}</td>
+                                            <td><a href="{{ url_for('edit_category', game_id=game._id, category_id=category._id) }}"
+                                                    class="btn btn-primary">Edit Category</a></td>
+                                            <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#modal_{{category._id}}">
+                                                    Delete Category</button></td>
+                                        </tr>
+                                        {%- endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {%- else -%}
+                            <p class="text-center">No categories found.</p>
+                            {%- endif %}
+                        </div>
+                    </div>
+                    <div class="col s12 text-center mb-3">
+                        <a href="{{ url_for('add_category', id=game._id) }}" class="btn btn-primary">Add
+                            {{ url_to_display(game.name) }} Category</a>
+                    </div>
+                    <hr class="mb-3">
+                    {%- endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONFIRMATION MODALS -->
+{% for player in players -%}
+<div class="modal fade" id="modal_{{ player._id }}" tabindex="-1" aria-labelledby="{{ player._id }}ModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="{{ player._id }}ModalLabel">Are you sure you want to delete this player?
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <strong>Player:</strong> {{ player['name'] }}<br>
+                    <strong>Twitch:</strong> {{ player.links.twitch[22:] }}<br>
+                    <strong>Youtube:</strong> {{ player.links.youtube[26:] }}<br>
+                    <strong>Link:</strong> {{ player.links.link }}
+                </p>
+                <p>Continuing will remove this player and all of their scores from the database.</p>
+                <p><small>(The data will be archived, but it would be a headache to restore it, so please be sure
+                        that you really want to do this.)</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="{{ url_for('delete_player', player_id=player._id) }}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+{%- endfor %}
+{% for game in games -%}
+<div class="modal fade" id="modal_{{ game._id }}" tabindex="-1" aria-labelledby="{{ game._id }}ModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="{{ game._id }}ModalLabel">Are you sure you want to delete this game?
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Game:</strong> {{ url_to_display(game['name']) }}</p>
+                <p>Continuing will remove this game, all associated categories and all associated scores from the
+                    database.</p>
+                <p><small>(The data will be archived, but it would be a big headache to restore it, so please be sure
+                        that you really want to do this.)</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="{{ url_for('delete_game', game_id=game._id) }}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% if nav_links[game["name"]] -%}
+{%- for category in nav_links[game["name"]] -%}
+<div class="modal fade" id="modal_{{ category._id }}" tabindex="-1" aria-labelledby="{{ category._id }}ModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="{{ category._id }}ModalLabel">Are you sure you want to delete this game?
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Game:</strong> {{ url_to_display(game['name']) }}</p>
+                <p><strong>Category:</strong> {{ url_to_display(category['name']) }}</p>
+                <p>Continuing will remove this category and all associated scores from the database.</p>
+                <p><small>(The data will be archived, but it would be a big headache to restore it, so please be sure
+                        that you really want to do this.)</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="{{ url_for('delete_category', category_id=category._id) }}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+{%- endfor -%}
+{%- endif -%}
+{%- endfor %}
+{% endblock %}

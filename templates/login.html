@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-sm-12 col-md-8 mx-auto mt-5">
+            <div class="card border-secondary shadow mb-3">
+                <div class="card-header">Login</div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('login') }}">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label class="col-form-label" for="username">Username</label>
+                                <input id="username" name="username" minlength="5" maxlength="15"
+                                    pattern="^[a-zA-Z0-9]{5,15}$" class="form-control" type="text" required>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="col-form-label mt-2" for="password">Password</label>
+                                <input id="password" name="password" type="password" minlength="5" maxlength="15"
+                                    pattern="^[a-zA-Z0-9!@#$&().+,]{5,15}$" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                    <button type="submit" class="btn btn-primary mt-4">Log In </button></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

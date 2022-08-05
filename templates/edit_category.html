@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-sm-12 col-md-8 mx-auto">
+            <div class="card border-secondary shadow mb-3">
+                <div class="card-header">Edit Category</div>
+                <div class="card-body">
+                    <form method="POST" action="">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="game_id" class="form-label mt-4">Select Game</label>
+                                <select class="form-select" id="game_id" name="game_id" required>
+                                    <option value="" disabled>Select Game</option>
+                                    {% for game in games %}
+                                    <option value="{{game._id }}"{%- if game_id == game._id|string -%}selected{%- endif -%}>{{ url_to_display(game.name) }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="col-form-label" for="name">Category Name</label>
+                                <input id="name" name="name" minlength="2" maxlength="50"
+                                    placeholder='e.g. 48 Races - Original Courses'
+                                    pattern="^[a-zA-Z0-9 _\-:'.!,]{2,50}$" class="form-control" type="text" 
+                                    value="{{ url_to_display(category.name) }}" required>
+                            </div>
+                            <div class="col-sm-12">
+                                <label for="desc" class="form-label mt-4">Category Description</label>
+                                <textarea class="form-control" id="desc" name="desc" rows="3" minlength="2" 
+                                placeholder="e.g. 150cc | No Teams | No Items | Hard CPU | All Vehicles | In Order"
+                                maxlength="200">{{ category.desc }}</textarea>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                    <a href="{{ url_for('admin') }}" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Update Category</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

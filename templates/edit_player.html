@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-sm-12 col-md-8 mx-auto">
+            <div class="card border-secondary shadow mb-3">
+                <div class="card-header">Edit Player</div>
+                <div class="card-body">
+                    <form method="POST" action="">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label class="col-form-label" for="name">Player Name</label>
+                                <div class="input-group mb-3">
+                                <input id="name" name="name" minlength="2" maxlength="30" class="form-control" 
+                                    type="text" value="{{ player.name }}" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="col-form-label" for="twitch">Twitch Channel Name 
+                                    <span class="form-text">(Optional)</span></label>
+                                <div class="input-group mb-3">
+                                <span class="input-group-text" id="youtube-addon">https://www.twitch.tv/</span>
+                                <input id="twitch" name="twitch" minlength="2" maxlength="30" class="form-control" 
+                                    type="text" minlength="2" maxlength="60" value="{{ player.links.twitch[22:] }}">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="col-form-label" for="youtube">YouTube Channel Name
+                                    <span class="form-text">(Optional)</span></label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="youtube-addon">https://youtube.com/c/</span>
+                                    <input type="text" class="form-control" id="youtube" name="youtube" 
+                                        aria-describedby="youtube-addon" minlength="2" maxlength="60"
+                                        value="{{ player.links.youtube[26:] }}">
+                                  </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="col-form-label" for="link">Other Link
+                                    <span class="form-text">(Optional)</span></label>
+                                <input id="link" name="link" class="form-control" type="url"
+                                    placeholder="e.g. Twitter, Facebook, personal website, etc."
+                                    value="{{ player.links.link }}" 
+                                    oninvalid="this.setCustomValidity('Please enter a valid URL (including https:\/\/ prefix\)')"
+                                    oninput="this.setCustomValidity('')"/>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                    <a href="{{ url_for('admin') }}" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Update Player</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
