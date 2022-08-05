@@ -144,10 +144,10 @@ def home():
     its leaderboard page.
     """
     default_game = mongo.db.games.find_one_or_404(
-        {"_id": ObjectId("6240b11b437adcc562ab7826")}
+        {"_id": ObjectId("62ed293931cff58ed6a6148b")}
     )
     default_category = mongo.db.categories.find_one_or_404(
-        {"_id": ObjectId("6240b175437adcc562ab7828")}
+        {"_id": ObjectId("62ed29e68465a6e232e28242")}
     )
     return redirect(
         url_for(
