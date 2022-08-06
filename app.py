@@ -14,6 +14,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import check_password_hash, generate_password_hash
+from datetime import datetime
 
 if os.path.exists("env.py"):
     import env
@@ -69,6 +70,14 @@ def admin_only(f):
         return f(*args, **kwargs)
 
     return decorated_function
+
+
+@app.context_processor
+def inject_now():
+    """
+    Context processor to inject current datetime into template
+    """
+    return {'now': datetime.utcnow()}
 
 
 @app.template_global()
