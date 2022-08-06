@@ -1,17 +1,59 @@
 :root {
     --bs-danger: #b63d30;
+    --bs-body-bg: #181818;
+    --brand-red: #ff0600;
+    --bs-dark: #252525;
+    --bs-dark-rgb: 37,37,37;
+    --card-header: #303030;
+    --text-link: #ff8833;
+    --text-link-hover: #ff8833;
+    --btn-blue: #00728c;
+    --btn-blue-hover: #004859;
+    --btn-red: #d51d1d;
+    --btn-red-hover: #a81b1b;
+    --twitch-link: #975fff;
+    --twitch-link-hover: #823eff;
+    --youtube-link: #ff4646;
+    --youtube-link-hover: #ff2626;
+    --other-link: #ff8833;
+    --other-link-hover: #ff6c00;
 }
 
-.btn-danger {
+a {
+    text-decoration: none;
+    color: var(--text-link);
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--text-link-hover);
+}
+
+.btn-primary,
+.btn-primary:focus {
+    background-color: var(--btn-blue);
+    border-color: var(--btn-blue);
+}
+
+.btn-primary:active,
+.btn-primary:hover {
+    background-color: var(--btn-blue-hover);
+    border-color: var(--btn-blue-hover);
+    text-decoration: none;
+}
+
+.btn-danger,
+.btn-danger:focus {
     color: #fff;
-    background-color: #ca4536;
-    border-color: #ca4536;
+    background-color: var(--btn-red);
+    border-color: var(--btn-red);
 }
 
 .btn-danger:hover {
     color: #fff;
-    background-color: #aa392d;
-    border-color: #aa392d;
+    background-color: var(--btn-red-hover);
+    border-color: var(--btn-red-hover);
+    text-decoration: none;
 }
 
 body {
@@ -22,6 +64,12 @@ body {
 i {
     font-style: normal;
 }
+
+.modal-content {
+    background-color: var(--bs-dark);
+}
+
+/* Scores page styles */
 
 .header-logo {
     width: 80%;
@@ -35,42 +83,44 @@ i {
 .twitch-link,
 .twitch-link>i {
     text-decoration: none;
-    color: #975fff;
+    color: var(--twitch-link);
     font-size: 1.5rem;
     padding: 0px 3px;
 }
 
 .twitch-link>i:hover {
-    color: #823eff;
+    color: var(--twitch-link-hover);
 }
 
 .youtube-link,
 .youtube-link>i {
     text-decoration: none;
-    color: #ff4646;
+    color: var(--youtube-link);
     font-size: 1.5rem;
     padding: 0px 3px;
 }
 
 .youtube-link>i:hover {
-    color: #ff2626;
+    color: var(--youtube-link-hover);
 }
 
 .other-link,
 .other-link>i {
     text-decoration: none;
-    color: #ff8833;
+    color: var(--other-link);
     font-size: 1.5rem;
     padding: 0px 3px;
 }
 
 .other-link>i:hover {
-    color: #ff6c00;
+    color: var(--other-link-hover);
 }
 
 .medal {
     height: 35px;
 }
+
+/* Navbar styles */
 
 .navbar {
     padding-top: 0.5rem;
@@ -85,8 +135,25 @@ i {
     margin-bottom: 75px;
 }
 
+/* Side menu styles */
+
+.offcanvas {
+    background-color: var(--bs-dark);
+}
+
 .offcanvas-logo {
+    width: 95%;
     height: 32px;
+}
+
+/* Admin panel styles */
+
+.card {
+    background-color: var(--bs-dark);
+}
+
+.card-header {
+    background-color: var(--card-header);
 }
 
 .help-link {
