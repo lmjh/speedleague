@@ -72,12 +72,16 @@ i {
 /* Scores page styles */
 
 .header-logo {
-    width: 80%;
+    width: 95%;
 }
 
 .scores-table {
     font-family: 'Signika Negative', sans-serif;
     font-weight: bold;
+}
+
+.links-cell {
+    min-width: 75px;
 }
 
 .twitch-link,
@@ -146,6 +150,12 @@ i {
     height: 32px;
 }
 
+/* Footer styles */
+
+.footer {
+    box-shadow: 0 -.5rem 1rem rgba(0,0,0,.15) !important;
+}
+
 /* Admin panel styles */
 
 .card {
@@ -173,4 +183,10 @@ i {
     padding: 3px 6px;
     cursor: initial;
     margin-bottom: 2px;
+}
+
+@media (min-width: 1200px) {
+    .header-logo {
+        width: 80%;
+    }
 }

@@ -43,14 +43,20 @@
               <small>{{ "+" + centi_to_string(loop.nextitem.score - score.score) }}</small>
               {%- endif -%}
             </td>
-            <td>
-                {%- if score.links.twitch -%}<a href='{{ score.links.twitch }}' target="_blank"
-                class="twitch-link"><i class="fa-brands fa-twitch"></i></a>{%- endif -%}
-                {%- if score.links.youtube -%}<a href='{{ score.links.youtube }}' target="_blank"
-                class="youtube-link"><i class="fa-brands fa-youtube"></i></a>{%- endif -%}
-                {%- if score.links.link -%}<a href='{{ score.links.link }}' target="_blank"
-                class="other-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>{%- endif -%}
-              </td>
+            <td class="links-cell">
+              {%- if score.links.twitch -%}
+              <a href='{{ score.links.twitch }}' target="_blank" rel="nofollow" 
+                class="twitch-link"><i class="fa-brands fa-twitch"></i></a>
+              {%- endif -%}
+              {%- if score.links.youtube -%}
+              <a href='{{ score.links.youtube }}' target="_blank" rel="nofollow" 
+                class="youtube-link"><i class="fa-brands fa-youtube"></i></a>
+              {%- endif -%}
+              {%- if score.links.link -%}
+              <a href='{{ score.links.link }}' target="_blank" rel="nofollow" 
+                class="other-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              {%- endif -%}
+            </td>
           </tr>
           {% else %}
           <tr>
