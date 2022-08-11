@@ -197,6 +197,11 @@ i {
     display: none;
 }
 
+.message-box {
+    z-index: 10;
+    margin-top: 4rem;
+}
+
 .tutorial-btn {
     padding: 3px 6px;
     cursor: initial;
