@@ -1,6 +1,8 @@
 import os
 import math
 import urllib.parse
+import re
+
 from functools import wraps
 from flask import (
     Flask,
@@ -90,7 +92,7 @@ def centi_to_string(centi):
     seconds = math.floor((centi / 100) % 60)
     minutes = math.floor(((centi / (100 * 60)) % 60))
     hours = math.floor(((centi / (100 * 60 * 60)) % 24))
-    return f"{hours}:{minutes:02d}:{seconds:02d}:{centiseconds:02d}"
+    return f"{hours}:{minutes:02d}:{seconds:02d}.{centiseconds:02d}"
 
 
 @app.template_global()
@@ -99,7 +101,7 @@ def string_to_centi(string):
     Converts a string in the format "hours:minutes:seconds:centiseconds" into
     an integer number of centiseconds.
     """
-    split = string.split(":")
+    split = re.split(":|\.", string)
     centi = (
         int(split[3])
         + int(split[2]) * 100
