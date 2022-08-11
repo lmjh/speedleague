@@ -573,9 +573,9 @@ def add_player():
     if request.method == "POST":
         # retrieve submitted data from form
         name = request.form.get("name")
-        twitch = request.form.get("twitch").lower()
-        youtube = request.form.get("youtube").lower()
-        link = request.form.get("link").lower()
+        twitch = request.form.get("twitch")
+        youtube = request.form.get("youtube")
+        link = request.form.get("link")
 
         # if a twitch username was entered, convert into link
         if twitch:
@@ -628,9 +628,9 @@ def edit_player(player_id):
     if request.method == "POST":
         # retrieve submitted data from form
         name = request.form.get("name")
-        twitch = request.form.get("twitch").lower()
-        youtube = request.form.get("youtube").lower()
-        link = request.form.get("link").lower()
+        twitch = request.form.get("twitch")
+        youtube = request.form.get("youtube")
+        link = request.form.get("link")
 
         # if the player name has changed, check it isn't a duplicate of another
         # name in the database
