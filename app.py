@@ -74,6 +74,40 @@ def admin_only(f):
     return decorated_function
 
 
+def post_restricted(f):
+    """
+    Decorator to prevent posting if current user is demouser
+    """
+
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get("user") == "demouser" and request.method == "POST":
+            flash(
+                "Sorry, the demo account can't make changes to the database."
+                )
+            return redirect(url_for("admin"))
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+
+def delete_restricted(f):
+    """
+    Decorator to prevent deletion if current user is demouser
+    """
+
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get("user") == "demouser":
+            flash(
+                "Sorry, the demo account can't make changes to the database."
+                )
+            return redirect(url_for("admin"))
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+
 @app.context_processor
 def inject_now():
     """
@@ -371,6 +405,7 @@ def logout():
 
 
 @app.route("/update_password", methods=["GET", "POST"])
+@post_restricted
 @login_required
 def update_password():
     """
@@ -431,6 +466,7 @@ def admin():
 
 
 @app.route("/add_score/<category_id>", methods=["GET", "POST"])
+@post_restricted
 @login_required
 def add_score(category_id):
     """
@@ -547,6 +583,7 @@ def delete_scores(category_id):
 
 
 @app.route("/delete_score/<score_id>")
+@delete_restricted
 @login_required
 def delete_score(score_id):
     """
@@ -564,6 +601,7 @@ def delete_score(score_id):
 
 
 @app.route("/add_player", methods=["GET", "POST"])
+@post_restricted
 @login_required
 def add_player():
     """
@@ -618,6 +656,7 @@ def add_player():
 
 
 @app.route("/edit_player/<player_id>", methods=["GET", "POST"])
+@post_restricted
 @login_required
 def edit_player(player_id):
     """
@@ -674,6 +713,7 @@ def edit_player(player_id):
 
 
 @app.route("/delete_player/<player_id>")
+@delete_restricted
 @login_required
 def delete_player(player_id):
     """
@@ -700,6 +740,7 @@ def delete_player(player_id):
 
 
 @app.route("/add_game", methods=["GET", "POST"])
+@post_restricted
 @login_required
 def add_game():
     """
@@ -734,6 +775,7 @@ def add_game():
 
 
 @app.route("/edit_game/<game_id>", methods=["GET", "POST"])
+@post_restricted
 @login_required
 def edit_game(game_id):
     """
@@ -769,6 +811,7 @@ def edit_game(game_id):
 
 
 @app.route("/delete_game/<game_id>")
+@delete_restricted
 @login_required
 def delete_game(game_id):
     """
@@ -800,6 +843,7 @@ def delete_game(game_id):
 
 
 @app.route("/add_category", methods=["GET", "POST"])
+@post_restricted
 @login_required
 def add_category():
     """
@@ -842,6 +886,7 @@ def add_category():
 
 
 @app.route("/edit_category/<game_id>/<category_id>", methods=["GET", "POST"])
+@post_restricted
 @login_required
 def edit_category(game_id, category_id):
     """
@@ -901,6 +946,7 @@ def edit_category(game_id, category_id):
 
 
 @app.route("/delete_category/<category_id>")
+@delete_restricted
 @login_required
 def delete_category(category_id):
     """
