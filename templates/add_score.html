@@ -23,15 +23,15 @@
                             <div class="col-sm-12">
                                 <label class="form-label mt-4">Time</label>
                                 <div class="input-group">
-                                    <input id="hours" name="hours" type="text" class="form-control text-center" value="00" pattern="^[0-9]{1,2}$" required aria-label="Hours">
+                                    <input id="hours" name="hours" type="number" class="form-control text-center" value="0" min="0" max="99" required aria-label="Hours">
                                     <span class="input-group-text">:</span>
-                                    <input id="minutes" name="minutes" type="text" class="form-control text-center" value="00" pattern="^[0-9]{1,2}$" required aria-label="Minutes">
+                                    <input id="minutes" name="minutes" type="number" class="form-control text-center" value="0" min="0" max="59" required aria-label="Minutes">
                                     <span class="input-group-text">:</span>
-                                    <input id="seconds" name="seconds" type="text" class="form-control text-center" value="00" pattern="^[0-9]{1,2}$" required aria-label="Seconds">
-                                    <span class="input-group-text">:</span>
-                                    <input id="centiseconds" name="centiseconds" type="text" class="form-control text-center" value="00" pattern="^[0-9]{1,2}$" required aria-label="centiseconds">
+                                    <input id="seconds" name="seconds" type="number" class="form-control text-center" value="0" min="0" max="59" required aria-label="Seconds">
+                                    <span class="input-group-text">.</span>
+                                    <input id="centiseconds" name="centiseconds" type="number" class="form-control text-center" value="0" min="0" max="99" required aria-label="centiseconds">
                                   </div>
-                                  <div class="text-center mt-1 text-muted">( hours : minutes : seconds : centiseconds )</div>
+                                  <div class="text-center mt-1 text-muted">( hours : minutes : seconds . centiseconds )</div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
