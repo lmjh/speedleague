@@ -4,9 +4,9 @@ SpeedLeague is a Flask leaderboard application to rank the scores of people comp
 
 ![](documentation/readme-images/speedleague-mockup.png)
 
-The live site is deployed using Heroku and can be viewed [here](https://speedleague.herokuapp.com/).
+The live site is deployed using Render and can be viewed [here](https://speedleague.onrender.com/).
 
-To view the admin panel features, [login here](https://speedleague.herokuapp.com/login) with the following credentials:
+To view the admin panel features, [login here](https://speedleague.onrender.com/login) with the following credentials:
 
 ```
 Username: demouser
@@ -45,7 +45,7 @@ Note that this is a restricted account which cannot add, edit or delete data.
 - [Flask](https://palletsprojects.com/p/flask/), [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) and [Werkzeug](https://palletsprojects.com/p/werkzeug/) - Used to build the main application structure, page templates (Jinja) and account security (Werkzeug).
 - [MongoDB](https://www.mongodb.com/) - Used for the application's database.
 - [PyMongo](https://github.com/mongodb/mongo-python-driver) - Used to connect Python with MongoDB.
-- [Heroku](https://heroku.com/) - Used to deploy the site.
+- [Render](https://render.com/) - Used to deploy the site.
 - [Bootstrap 5](https://getbootstrap.com/) - Used to create layout and styling of site.
 - [Bootswatch Darkly](https://bootswatch.com/darkly/) - Used as basis for dark-mode design, with custom styles applied on top.
 - [Affinity Designer](https://affinity.serif.com/en-gb/designer/) - Used to design logo and illustrations.
